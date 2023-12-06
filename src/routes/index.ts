@@ -8,12 +8,12 @@ import { companyRouter } from './company';
 
 const router = express.Router();
 
-router.use('/user/signup', userSignup);
-router.use('/user/login', userLogin);
-router.use('/user/profile', profileRouter);
-router.use('/images', imageRouter);
-router.use('/company', companyRouter)
+// router.use('/user/signup', userSignup);
+// router.use('/user/login', userLogin);
+// router.use('/user/profile', profileRouter);
+// router.use('/images', imageRouter);
+router.use('/staff', companyRouter)
 
-router.use('/demo', demoRouter);
+// router.use('/demo', demoRouter);
 
 export default router;

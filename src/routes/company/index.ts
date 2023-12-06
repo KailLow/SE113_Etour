@@ -10,6 +10,8 @@ import { editStaff } from './editStaff';
 import companyLogin from './login';
 import { removeStaff } from './removeStaff';
 import { viewStaffList } from './viewStaffList';
+import schema from './schema';
+import { addAdmin } from './addAdmin';
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -19,27 +21,33 @@ companyRouter.use('/login', companyLogin);
 
 
 companyRouter.get(
-  '/staff',
+  '/',
   authorization([StaffPermission.VIEW_STAFF]),
   viewStaffList,
 );
 
 companyRouter.put(
-  '/staff/:id',
+  '/:id',
   authorization([StaffPermission.EDIT_STAFF]),
   upload.fields([{ name: 'image', maxCount: 1 }]),
   editStaff,
 );
 
 companyRouter.delete(
-  '/staff/:id',
+  '/:id',
   authorization([StaffPermission.DELETE_STAFF]),
   removeStaff,
 );
 
 companyRouter.post(
-  '/staff',
+  '/',
   authorization([StaffPermission.ADD_STAFF]),
   upload.fields([{ name: 'image', maxCount: 1 }]),
   addStaff,
+);
+
+companyRouter.post(
+  '/create-admin',
+  validator(schema.createAdmin),
+  addAdmin,
 );

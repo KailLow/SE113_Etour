@@ -5,6 +5,11 @@ export default {
     username: Joi.string().required(),
     password: Joi.string().required().min(6),
   }),
+  createAdmin: Joi.object().keys({
+    fullName: Joi.string().required(),
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+  }),
   signup: Joi.object().keys({
     name: Joi.string().required().min(1),
     email: Joi.string().required().email(),

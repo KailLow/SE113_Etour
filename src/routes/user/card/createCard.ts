@@ -8,6 +8,7 @@ import { ProtectedUserRequest } from '../../../types/app-request';
 export const createNewCard = asyncHandler(
   async (req: ProtectedUserRequest, res) => {
     const userId = req.user?._id;
+    
     const cardInfo = req.body as ICard;
     if (!userId) throw new BadRequestError('userId not found');
 

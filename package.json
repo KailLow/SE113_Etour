@@ -13,7 +13,7 @@
     "watch-ts": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
     "eslint": "eslint . --ext .js,.ts",
     "upgrade": "npm update --save-dev && npm update --save",
-    "test": "jest --forceExit --detectOpenHandles --verbose false",
+    "test": "jest --coverage --forceExit --detectOpenHandles --verbose false",
     "deploy": "docker build . -t hoanghy/e-tour && docker push hoanghy/e-tour",
     "test-watch": "jest --watch --detectOpenHandles --verbose"
   },
@@ -51,6 +51,8 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
+    "@stryker-mutator/core": "^7.3.0",
+    "@stryker-mutator/jest-runner": "^7.3.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
@@ -73,7 +75,7 @@
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.29.0",
-    "jest": "^29.3.1",
+    "jest": "^29.7.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
     "supertest": "^6.3.3",

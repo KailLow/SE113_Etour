@@ -1,5 +1,5 @@
 import { connectMongo } from './database';
-import { runHttpServer, runSocketServer } from './runServer';
+import { runHttpServer } from './runServer';
 import os from 'os';
 // import osUtils from 'os-utils'
 
@@ -7,7 +7,6 @@ import os from 'os';
 
 async function startServer() {
   await connectMongo();
-  await runSocketServer();
   await runHttpServer();
 
 

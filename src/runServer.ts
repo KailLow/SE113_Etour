@@ -2,52 +2,6 @@ import { port } from './config';
 import Logger from './core/Logger';
 import httpServer from './httpServer';
 
-import { authenticateStaff, authenticateUser } from './auth/authentication';
-import { BadRequestError } from './core/ApiError';
-import socketRouter from './routes/socket';
-import io from './socketServer';
-
-export function runSocketServer(): Promise<any> {
-  io.use(async (socket, next) => {
-    const token = (socket.handshake.query.token as string) || '';
-    const userType = (socket.handshake.query.type as string) || ''; // client or staff
-
-    if (!userType) return next();
-
-    try {
-      switch (userType) {
-        case 'client':
-          const { user } = await authenticateUser(token);
-          socket.data.user = user;
-          break;
-        case 'staff':
-          const { staff } = await authenticateStaff(token);
-          socket.data.staff = staff;
-          break;
-        default:
-          return next(
-            new BadRequestError(
-              'userType is invalid (only "client" or "staff" is allowed)',
-            ),
-          );
-      }
-    } catch (error: any) {
-      return next(new BadRequestError('Token is wrong'));
-    }
-
-    next();
-  });
-
-  return new Promise((resolve, reject) => {
-    io.on('connection', async (socket) => {
-      Logger.debug('New connection');
-
-      socketRouter(socket);
-    });
-    resolve('Socket IO server is running');
-  });
-}
-
 export function runHttpServer(): Promise<any> {
   return new Promise((resolve, reject) => {
     httpServer

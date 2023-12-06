@@ -36,7 +36,6 @@ export interface Staff {
   image?: string;
   role: string;
   permissions: StaffPermission[];
-  companyId: Types.ObjectId;
   credential: Credential;
 }
 
@@ -57,10 +56,6 @@ const schema = new Schema<Staff>(
         enum: Object.values(StaffPermission),
       },
     ],
-    companyId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Company',
-    },
     credential: { type: Schema.Types.ObjectId, ref: 'Credential' },
   },
   {
@@ -69,4 +64,3 @@ const schema = new Schema<Staff>(
 );
 
 export const StaffModel = model('Staff', schema);
-StaffModel.watch().on('change', watch<Staff>(StaffModel));

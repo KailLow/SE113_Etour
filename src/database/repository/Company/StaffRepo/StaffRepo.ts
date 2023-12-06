@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-import crypto from 'crypto';
 import { Staff, StaffModel } from '@model/Company/Staff';
 import {
   AuthenticationType,
@@ -7,11 +5,9 @@ import {
   CredentialModel,
   UserType,
 } from '@model/Credential';
-import { createParameter, findByUsernameParameter } from './StaffRepoSchema';
-import CredentialRepo from '../../CredentialRepo';
-import KeystoreRepo from '../../KeystoreRepo';
-import Logger from '../../../../core/Logger';
 import { Types } from 'mongoose';
+import CredentialRepo from '../../CredentialRepo';
+import { createParameter, findByUsernameParameter } from './StaffRepoSchema';
 
 async function create({
   staff,

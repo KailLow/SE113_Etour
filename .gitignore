@@ -37,3 +37,5 @@ temp.*
 
 *.save
 *.save.*
+# stryker temp files
+.stryker-tmp

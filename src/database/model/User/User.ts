@@ -1,8 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
 import { Credential } from '../Credential';
 import watch from '../../../helpers/realtime/watch';
-import { ITouristsRoute } from '../Company/TouristsRoute';
-import { IVoucher } from './Voucher';
 
 export interface INotification {
   title: string;
@@ -40,8 +38,6 @@ export interface IUser {
   isPhoneVerified?: boolean;
   isEmailVerified?: boolean;
   credential: Credential;
-  savedVouchers?: IVoucher[];
-  savedRoutes?: ITouristsRoute[];
   notifications?: INotification[];
   cards: ICard[];
   defaultCard: string;
@@ -91,18 +87,6 @@ const schema = new Schema<IUser>(
       type: Schema.Types.ObjectId,
       ref: 'Credential',
     },
-    savedRoutes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'TouristsRoute',
-      },
-    ],
-    savedVouchers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Voucher',
-      },
-    ],
     notifications: [
       {
         title: String,

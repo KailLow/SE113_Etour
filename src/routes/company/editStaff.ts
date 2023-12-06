@@ -7,7 +7,6 @@ import { ProtectedStaffRequest } from '../../types/app-request';
 export const editStaff = asyncHandler(
   async (req: ProtectedStaffRequest, res) => {
     const { id } = req.params;
-    const companyId = req.staff.companyId;
     const staffData = req.body;
 
     let image;
@@ -23,7 +22,7 @@ export const editStaff = asyncHandler(
     staffData.image = image || undefined;
 
     const staff = await StaffModel.findOneAndUpdate(
-      { companyId, _id: id },
+      { id: id },
       staffData,
       { new: true },
     );

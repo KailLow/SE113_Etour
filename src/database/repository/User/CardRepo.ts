@@ -7,7 +7,10 @@ async function create(
   userId: string | Types.ObjectId,
   cardInfo: ICard,
 ): Promise<any> {
+  // findById(id: string) 
+  // findOne({ id: string; })
   const user = (await UserModel.findOneAndUpdate(
+    // not equal
     { _id: userId, 'cards.cardNumber': { $ne: cardInfo.cardNumber } },
     {
       $push: {
